@@ -64,7 +64,7 @@ counter=0
 
 function start-script {
 counter=$((counter+1))
-echo "Starting run [$counter]"
+echo "[$(date)] [INFO] : Waste Collector: Starting run [$counter]"
 
 exec 3>>$PIDFILE
 if ! flock -x -n 3; then
@@ -370,9 +370,9 @@ fi
 
 function restart-script {
 
-echo "I'm tired, going to have a nap"
+echo "[$(date)] [INFO] : Waste Collector: I'm tired, going to take a nap"
 sleep 60
-echo "Ok, I'm awake let's get back to the start"
+echo "[$(date)] [INFO] : Waste Collector: Ok, I'm awake let's get back to the start"
 start-script
 
 }
