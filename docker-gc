@@ -60,8 +60,11 @@ REMOVE_VOLUMES=${REMOVE_VOLUMES:=0}
 EXCLUDE_VOLUMES_IDS_FILE=${EXCLUDE_VOLUMES_IDS_FILE:=/etc/docker-gc-exclude-volumes}
 VOLUME_DELETE_ONLY_DRIVER=${VOLUME_DELETE_ONLY_DRIVER:=local}
 PIDFILE=$PID_DIR/dockergc
+counter=0
 
 function start-script {
+counter=$((counter+1))
+echo "Starting run [$counter]"
 
 exec 3>>$PIDFILE
 if ! flock -x -n 3; then
@@ -360,13 +363,16 @@ if [[ $REMOVE_VOLUMES -gt 0 ]]; then
     fi
 fi
 
+echo "Scxript done, lets do that again soon"
 restart-script
 
 }
 
 function restart-script {
 
+echo "I'm tired, going to have a nap"
 sleep 60
+echo "Ok, I'm awake let's get back to the start"
 start-script
 
 }
