@@ -61,6 +61,8 @@ EXCLUDE_VOLUMES_IDS_FILE=${EXCLUDE_VOLUMES_IDS_FILE:=/etc/docker-gc-exclude-volu
 VOLUME_DELETE_ONLY_DRIVER=${VOLUME_DELETE_ONLY_DRIVER:=local}
 PIDFILE=$PID_DIR/dockergc
 
+function start-script {
+
 exec 3>>$PIDFILE
 if ! flock -x -n 3; then
   echo "[$(date)] : docker-gc : Process is already running"
@@ -357,3 +359,16 @@ if [[ $REMOVE_VOLUMES -gt 0 ]]; then
         fi
     fi
 fi
+
+restart-script
+
+}
+
+function restart-script {
+
+sleep 60
+start-script
+
+}
+
+
