@@ -325,7 +325,7 @@ else
     image_log "Removing image" images.reap
     xargs -n 1 $DOCKER rmi $FORCE_IMAGE_FLAG < images.reap &>/dev/null || true
 fi
-echo "Script done, lets do that again soon"
+echo "[$(date)] [INFO] : Waste Collector: Script done, lets do that again soon"
 restart-script
 
 if [[ $REMOVE_VOLUMES -gt 0 ]]; then
