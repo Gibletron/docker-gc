@@ -325,7 +325,9 @@ else
     image_log "Removing image" images.reap
     xargs -n 1 $DOCKER rmi $FORCE_IMAGE_FLAG < images.reap &>/dev/null || true
 fi
-echo "a8"
+echo "Script done, lets do that again soon"
+restart-script
+
 if [[ $REMOVE_VOLUMES -gt 0 ]]; then
     set +e
     $DOCKER volume ls --filter "dangling=true" -q &> /dev/null
@@ -363,9 +365,6 @@ if [[ $REMOVE_VOLUMES -gt 0 ]]; then
         fi
     fi
 fi
-echo "a9"
-echo "Script done, lets do that again soon"
-restart-script
 
 }
 
